@@ -25,7 +25,7 @@ export class ApiService {
     };
   }
 
-  getProducts (): Observable<Product[]> {
+   getProducts (): Observable<Product[]> {
     return this.http.get<Product[]>(apiUrl)
       .pipe(
         tap(heroes => console.log('fetched products')),
