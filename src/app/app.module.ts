@@ -26,7 +26,7 @@ import {
   declarations: [
     AppComponent,
     ProductsComponent,
-    ProductDetailComponent,
+    
     ProductAddComponent,
     ProductEditComponent
   ],
