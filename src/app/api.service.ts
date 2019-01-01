@@ -26,7 +26,7 @@ export class ApiService {
   }
 
   getProducts (): Observable<Product[]> {
-    return this.http.get<Product[]>(apiUrl)
+    return this.http.get<Product[]>("https://sailssv.herokuapp.com/products/list")
       
   }
   
