@@ -35,7 +35,7 @@ export class ProductEditComponent implements OnInit {
       .subscribe(res => {
           let id = res['_id'];
           this.isLoadingResults = false;
-          this.router.navigate(['/product-details', id]);
+         
         }, (err) => {
           console.log(err);
           this.isLoadingResults = false;

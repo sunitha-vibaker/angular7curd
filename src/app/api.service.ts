@@ -7,7 +7,7 @@ import { Product } from './product';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = "https://sailssv.herokuapp.com/products/list";
+const apiUrl = "https://sailssv.herokuapp.com/articles/list";
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +26,23 @@ export class ApiService {
   }
 
   getProducts (): Observable<Product[]> {
-    return this.http.get<Product[]>("https://sailssv.herokuapp.com/products/list")
-      
+    return this.http.get<Product[]>(apiUrl)
+      .pipe(
+        tap(heroes => console.log('fetched products')),
+        catchError(this.handleError('getProducts', []))
+      );
   }
   
+  getProduct(id: number): Observable<Product> {
+    const url = `${apiUrl}/${id}`;
+    return this.http.get<Product>(url).pipe(
+      tap(_ => console.log(`fetched product id=${id}`)),
+      catchError(this.handleError<Product>(`getProduct id=${id}`))
+    );
+  }
   
   addProduct (product): Observable<Product> {
-    return this.http.post<Product>("https://sailssv.herokuapp.com/products/create", product, httpOptions).pipe(
+    return this.http.post<Product>(apiUrl, product, httpOptions).pipe(
       tap((product: Product) => console.log(`added product w/ id=${product._id}`)),
       catchError(this.handleError<Product>('addProduct'))
     );
